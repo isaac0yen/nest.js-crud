@@ -85,13 +85,20 @@
 // Description: Executes a custom SQL query directly on the database without expecting any specific result.
 // Usage: Provide a valid SQL query for execution.
 
+// Import dotenv to load environment variables
 import 'dotenv/config';
-import mysql from 'mysql2/promise';
+
+// Import mysql from 'mysql2/promise' for promise-based usage
+import { Pool } from 'mysql2/promise';
+
+// Type definitions for MySQL results
 import { RowDataPacket, ResultSetHeader, FieldPacket } from 'mysql2';
 
+// Type aliases for database rows and results
 type DBRow = RowDataPacket[];
 type DBResult = ResultSetHeader & { insertId?: number };
 
+// Option and object types for query options and results
 type OptionType = {
   useIndex?: string;
   columns?: string;
@@ -99,36 +106,41 @@ type OptionType = {
 
 type ObjectType = Record<string, any>;
 
-let _DB: mysql.Pool;
+// Declare the MySQL pool variable
+
+import { createPool } from 'mysql2/promise';
+
+let _DB: Pool;
 
 export const DBConnect = async () => {
   try {
-    _DB = await mysql.createPool({
-      // eslint-disable-next-line no-undef
+    // Create a new MySQL connection pool
+    _DB = await createPool({
       host: process.env.DB_HOST,
-      // eslint-disable-next-line no-undef
       user: process.env.DB_USER,
-      // eslint-disable-next-line no-undef
       password: process.env.DB_PASSWORD,
-      // eslint-disable-next-line no-undef
       database: process.env.DB_DATABASE,
       namedPlaceholders: true,
       waitForConnections: true,
       connectionLimit: 120,
-      maxIdle: 50, // max idle connections, the default value is the same as `connectionLimit`
-      idleTimeout: 300000, // idle connections timeout, in milliseconds, the default value 60000
+      maxIdle: 50,
+      idleTimeout: 300000,
       queueLimit: 0,
       enableKeepAlive: true,
       keepAliveInitialDelay: 0,
       dateStrings: true,
     });
+
     // Try acquiring a connection to ensure the pool is working
     const connection = await _DB.getConnection();
     connection.release();
 
-    console.log('New MySQL Connection pool created successfully.');
+    console.log(
+      'New MySQL Connection pool created successfully. ',
+      process.env.DB_DATABASE,
+    );
   } catch (error) {
-    console.log('New MySQL Database connection failed.');
+    console.log('New MySQL Database connection failed:', error.message);
     throw error;
   }
 };
