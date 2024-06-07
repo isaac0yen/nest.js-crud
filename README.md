@@ -9,65 +9,6 @@ The project follows the modular structure recommended by NestJS, with separate m
 ```
 .
 ├── db.sql
-├── dist
-│   ├── app.controller.d.ts
-│   ├── app.controller.js
-│   ├── app.controller.js.map
-│   ├── app.module.d.ts
-│   ├── app.module.js
-│   ├── app.module.js.map
-│   ├── app.service.d.ts
-│   ├── app.service.js
-│   ├── app.service.js.map
-│   ├── database
-│   │   ├── database.module.d.ts
-│   │   ├── database.module.js
-│   │   ├── database.module.js.map
-│   │   ├── db.service.d.ts
-│   │   ├── db.service.js
-│   │   ├── db.service.js.map
-│   │   ├── db.utils.d.ts
-│   │   ├── db.utils.js
-│   │   └── db.utils.js.map
-│   ├── main.d.ts
-│   ├── main.js
-│   ├── main.js.map
-│   ├── tsconfig.build.tsbuildinfo
-│   ├── user
-│   │   ├── dto
-│   │   │   ├── create-user.dto.d.ts
-│   │   │   ├── create-user.dto.js
-│   │   │   ├── create-user.dto.js.map
-│   │   │   ├── update-user.dto.d.ts
-│   │   │   ├── update-user.dto.js
-│   │   │   └── update-user.dto.js.map
-│   │   ├── entities
-│   │   │   ├── user.entity.d.ts
-│   │   │   ├── user.entity.js
-│   │   │   └── user.entity.js.map
-│   │   ├── user.controller.d.ts
-│   │   ├── user.controller.js
-│   │   ├── user.controller.js.map
-│   │   ├── user.module.d.ts
-│   │   ├── user.module.js
-│   │   ├── user.module.js.map
-│   │   ├── user.service.d.ts
-│   │   ├── user.service.js
-│   │   └── user.service.js.map
-│   └── utils
-│       ├── dto
-│       │   ├── Validate.dto.d.ts
-│       │   ├── Validate.dto.js
-│       │   └── Validate.dto.js.map
-│       ├── utils.d.ts
-│       ├── utils.js
-│       ├── utils.js.map
-│       ├── utils.module.d.ts
-│       ├── utils.module.js
-│       ├── utils.module.js.map
-│       ├── utils.service.d.ts
-│       ├── utils.service.js
-│       └── utils.service.js.map
 ├── nest-cli.json
 ├── package.json
 ├── package-lock.json
