@@ -1,73 +1,162 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# NestJS CRUD Application
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+This is a NestJS application that provides a RESTful API for performing CRUD (Create, Read, Update, Delete) operations on a User entity. The application uses MySQL as the database and includes modules for database connectivity, user management, and utility functions.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Project Structure
 
-## Description
+The project follows the modular structure recommended by NestJS, with separate modules for different concerns. Here's an overview of the project structure:
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+```
+.
+├── db.sql
+├── dist
+│   ├── app.controller.d.ts
+│   ├── app.controller.js
+│   ├── app.controller.js.map
+│   ├── app.module.d.ts
+│   ├── app.module.js
+│   ├── app.module.js.map
+│   ├── app.service.d.ts
+│   ├── app.service.js
+│   ├── app.service.js.map
+│   ├── database
+│   │   ├── database.module.d.ts
+│   │   ├── database.module.js
+│   │   ├── database.module.js.map
+│   │   ├── db.service.d.ts
+│   │   ├── db.service.js
+│   │   ├── db.service.js.map
+│   │   ├── db.utils.d.ts
+│   │   ├── db.utils.js
+│   │   └── db.utils.js.map
+│   ├── main.d.ts
+│   ├── main.js
+│   ├── main.js.map
+│   ├── tsconfig.build.tsbuildinfo
+│   ├── user
+│   │   ├── dto
+│   │   │   ├── create-user.dto.d.ts
+│   │   │   ├── create-user.dto.js
+│   │   │   ├── create-user.dto.js.map
+│   │   │   ├── update-user.dto.d.ts
+│   │   │   ├── update-user.dto.js
+│   │   │   └── update-user.dto.js.map
+│   │   ├── entities
+│   │   │   ├── user.entity.d.ts
+│   │   │   ├── user.entity.js
+│   │   │   └── user.entity.js.map
+│   │   ├── user.controller.d.ts
+│   │   ├── user.controller.js
+│   │   ├── user.controller.js.map
+│   │   ├── user.module.d.ts
+│   │   ├── user.module.js
+│   │   ├── user.module.js.map
+│   │   ├── user.service.d.ts
+│   │   ├── user.service.js
+│   │   └── user.service.js.map
+│   └── utils
+│       ├── dto
+│       │   ├── Validate.dto.d.ts
+│       │   ├── Validate.dto.js
+│       │   └── Validate.dto.js.map
+│       ├── utils.d.ts
+│       ├── utils.js
+│       ├── utils.js.map
+│       ├── utils.module.d.ts
+│       ├── utils.module.js
+│       ├── utils.module.js.map
+│       ├── utils.service.d.ts
+│       ├── utils.service.js
+│       └── utils.service.js.map
+├── nest-cli.json
+├── package.json
+├── package-lock.json
+├── readme.md
+├── README.md
+├── src
+│   ├── app.controller.ts
+│   ├── app.module.ts
+│   ├── app.service.ts
+│   ├── database
+│   │   ├── database.module.ts
+│   │   ├── db.service.ts
+│   │   └── db.utils.ts
+│   ├── main.ts
+│   ├── user
+│   │   ├── dto
+│   │   │   ├── create-user.dto.ts
+│   │   │   └── update-user.dto.ts
+│   │   ├── entities
+│   │   │   └── user.entity.ts
+│   │   ├── user.controller.ts
+│   │   ├── user.module.ts
+│   │   └── user.service.ts
+│   └── utils
+│       ├── dto
+│       │   └── Validate.dto.ts
+│       ├── utils.module.ts
+│       ├── utils.service.ts
+│       └── utils.ts
+├── test
+│   ├── app.e2e-spec.ts
+│   └── jest-e2e.json
+├── tsconfig.build.json
+└── tsconfig.json
+```
+
+- `app.controller.ts`, `app.module.ts`, and `app.service.ts`: These files define the root module and entry point for the application.
+- `database/`: This directory contains the module and service for database connectivity and utility functions.
+- `user/`: This directory contains the module, controller, service, entities, and DTOs (Data Transfer Objects) related to the User entity.
+- `utils/`: This directory contains a module, service, and utility functions for various purposes.
+- `main.ts`: This file is the entry point for the NestJS application.
 
 ## Installation
 
-```bash
-$ npm install
-```
-
-## Running the app
+1. Clone the repository:
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+git clone https://github.com/isaac0yen/nest.js-crud.git
 ```
 
-## Test
+2. Install dependencies:
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+cd nest.js-crud
+npm install
 ```
 
-## Support
+3. Set up the MySQL database in `db.sql` and update the database configuration in `src/database/db.utils.ts`.
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+4. Start the application:
 
-## Stay in touch
+```
+npm run start:dev
+```
+The application should now be running at http://localhost:3000.
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+`Go to http://localhost:3000/api for swagger docs.`
 
-## License
+Usage
+The API provides the following endpoints for managing users:
 
-Nest is [MIT licensed](LICENSE).
+```
+http://localhost:3000/api for swagger docs.
+
+POST /user: Create a new user
+GET /user: Get a list of all users
+GET /user/:id: Get a specific user by ID
+PATCH /user/:id: Update a user by ID
+DELETE /user/:id: Delete a user by ID
+
+```
+You can use tools like Postman or cURL to interact with the API.
+
+Contributing
+Contributions are welcome! If you find any issues or want to add new features, please open an issue or submit a pull request.
+
+License
+This project is licensed under the MIT License.
+
+Contact
+If you have any questions or need further assistance, feel free to reach out to me at isaacoyeniyi06@gmail.com or visit my GitHub profile at https://github.com/isaac0yen.
+
