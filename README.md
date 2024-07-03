@@ -1,4 +1,4 @@
-# NestJS CRUD Application
+# NestJS CRUD Application.
 
 This is a NestJS application that provides a RESTful API for performing CRUD (Create, Read, Update, Delete) operations on a User entity. The application uses MySQL as the database and includes modules for database connectivity, user management, and utility functions.
 
